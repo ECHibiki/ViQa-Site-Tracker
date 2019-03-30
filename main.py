@@ -38,10 +38,6 @@ def retrieve_and_store_image(file_name, file_ext, file_size,
     if file_name == None:
         return None
     else:
-        print(file_width)
-        print(file_height)
-        print(thumb_width)
-        print(thumb_height)
         print(target_site + "src/" + str(target_name) + file_ext)
         if file_ext == ".webm" or file_ext == ".mp4":
             urllib.request.urlretrieve(target_site + "thumb/" + str(target_name) + ".jpg",
@@ -57,7 +53,6 @@ def retrieve_and_store_image(file_name, file_ext, file_size,
                 userconf.file_storage_location_absolute + str(target_name) + file_ext)
             file_json = returnFileJSON("image", file_name, file_ext, file_size, target_name,
                 file_width, file_height, thumb_width, thumb_height)
-        print(file_json)
         return file_json
 
 def returnFileJSON(type, file_name, file_ext, file_size, target_name,
@@ -149,6 +144,7 @@ try:
                             print(str(traceback.format_exc()))
                             log.write(str(traceback.format_exc()) + "\n\n")
                             log.close
+    os.system("sudo python3 " + userconf.rebuild_bot_location);
 except Exception as err:
     with open("err_log.txt", "a+") as log:
         print(str(traceback.format_exc()))

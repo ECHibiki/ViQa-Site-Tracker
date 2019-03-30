@@ -10,3 +10,5 @@ file_storage_location = '/' + board + '/src/'
 thumb_storage_location = '/' + board + '/thumb/'
 file_storage_location_absolute = '/var/www/html/' + board + '/src/'
 thumb_storage_location_absolute = '/var/www/html/' + board + '/thumb/'
+
+rebuild_bot_location = '~/Desktop/ViQa-Bot-Tools/rebuildbot.py'

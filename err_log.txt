@@ -46,3 +46,159 @@ Traceback (most recent call last):
 UnicodeEncodeError: 'latin-1' codec can't encode character '\u2019' in position 198: ordinal not in range(256)
 
 
+Traceback (most recent call last):
+  File "main.py", line 146, in <module>
+    pd[21],))
+  File "/usr/lib/python3/dist-packages/MySQLdb/cursors.py", line 234, in execute
+    args = tuple(map(db.literal, args))
+  File "/usr/lib/python3/dist-packages/MySQLdb/connections.py", line 316, in literal
+    s = self.escape(o, self.encoders)
+  File "/usr/lib/python3/dist-packages/MySQLdb/connections.py", line 226, in unicode_literal
+    return db.string_literal(str(u).encode(unicode_literal.charset))
+UnicodeEncodeError: 'latin-1' codec can't encode character '\u2019' in position 198: ordinal not in range(256)
+
+
+Traceback (most recent call last):
+  File "main.py", line 146, in <module>
+    pd[21],))
+  File "/usr/lib/python3/dist-packages/MySQLdb/cursors.py", line 234, in execute
+    args = tuple(map(db.literal, args))
+  File "/usr/lib/python3/dist-packages/MySQLdb/connections.py", line 316, in literal
+    s = self.escape(o, self.encoders)
+  File "/usr/lib/python3/dist-packages/MySQLdb/connections.py", line 226, in unicode_literal
+    return db.string_literal(str(u).encode(unicode_literal.charset))
+UnicodeEncodeError: 'latin-1' codec can't encode character '\u201d' in position 79: ordinal not in range(256)
+
+
+Traceback (most recent call last):
+  File "main.py", line 152, in <module>
+    os.subprocess("sudo python3 " + vconfig.rebuild_bot_location);
+AttributeError: module 'os' has no attribute 'subprocess'
+
+
+Traceback (most recent call last):
+  File "main.py", line 146, in <module>
+    pd[21],))
+  File "/usr/lib/python3/dist-packages/MySQLdb/cursors.py", line 234, in execute
+    args = tuple(map(db.literal, args))
+  File "/usr/lib/python3/dist-packages/MySQLdb/connections.py", line 316, in literal
+    s = self.escape(o, self.encoders)
+  File "/usr/lib/python3/dist-packages/MySQLdb/connections.py", line 226, in unicode_literal
+    return db.string_literal(str(u).encode(unicode_literal.charset))
+UnicodeEncodeError: 'latin-1' codec can't encode character '\u2019' in position 198: ordinal not in range(256)
+
+
+Traceback (most recent call last):
+  File "main.py", line 146, in <module>
+    pd[21],))
+  File "/usr/lib/python3/dist-packages/MySQLdb/cursors.py", line 234, in execute
+    args = tuple(map(db.literal, args))
+  File "/usr/lib/python3/dist-packages/MySQLdb/connections.py", line 316, in literal
+    s = self.escape(o, self.encoders)
+  File "/usr/lib/python3/dist-packages/MySQLdb/connections.py", line 226, in unicode_literal
+    return db.string_literal(str(u).encode(unicode_literal.charset))
+UnicodeEncodeError: 'latin-1' codec can't encode character '\u201d' in position 79: ordinal not in range(256)
+
+
+Traceback (most recent call last):
+  File "main.py", line 152, in <module>
+    os.popen("sudo python3 " + vconfig.rebuild_bot_location);
+NameError: name 'vconfig' is not defined
+
+
+Traceback (most recent call last):
+  File "main.py", line 146, in <module>
+    pd[21],))
+  File "/usr/lib/python3/dist-packages/MySQLdb/cursors.py", line 234, in execute
+    args = tuple(map(db.literal, args))
+  File "/usr/lib/python3/dist-packages/MySQLdb/connections.py", line 316, in literal
+    s = self.escape(o, self.encoders)
+  File "/usr/lib/python3/dist-packages/MySQLdb/connections.py", line 226, in unicode_literal
+    return db.string_literal(str(u).encode(unicode_literal.charset))
+UnicodeEncodeError: 'latin-1' codec can't encode character '\u2019' in position 198: ordinal not in range(256)
+
+
+Traceback (most recent call last):
+  File "main.py", line 146, in <module>
+    pd[21],))
+  File "/usr/lib/python3/dist-packages/MySQLdb/cursors.py", line 234, in execute
+    args = tuple(map(db.literal, args))
+  File "/usr/lib/python3/dist-packages/MySQLdb/connections.py", line 316, in literal
+    s = self.escape(o, self.encoders)
+  File "/usr/lib/python3/dist-packages/MySQLdb/connections.py", line 226, in unicode_literal
+    return db.string_literal(str(u).encode(unicode_literal.charset))
+UnicodeEncodeError: 'latin-1' codec can't encode character '\u201d' in position 79: ordinal not in range(256)
+
+
+Traceback (most recent call last):
+  File "main.py", line 141, in <module>
+    pd[21],))
+  File "/usr/lib/python3/dist-packages/MySQLdb/cursors.py", line 234, in execute
+    args = tuple(map(db.literal, args))
+  File "/usr/lib/python3/dist-packages/MySQLdb/connections.py", line 316, in literal
+    s = self.escape(o, self.encoders)
+  File "/usr/lib/python3/dist-packages/MySQLdb/connections.py", line 226, in unicode_literal
+    return db.string_literal(str(u).encode(unicode_literal.charset))
+UnicodeEncodeError: 'latin-1' codec can't encode character '\u2019' in position 198: ordinal not in range(256)
+
+
+Traceback (most recent call last):
+  File "main.py", line 141, in <module>
+    pd[21],))
+  File "/usr/lib/python3/dist-packages/MySQLdb/cursors.py", line 234, in execute
+    args = tuple(map(db.literal, args))
+  File "/usr/lib/python3/dist-packages/MySQLdb/connections.py", line 316, in literal
+    s = self.escape(o, self.encoders)
+  File "/usr/lib/python3/dist-packages/MySQLdb/connections.py", line 226, in unicode_literal
+    return db.string_literal(str(u).encode(unicode_literal.charset))
+UnicodeEncodeError: 'latin-1' codec can't encode character '\u201d' in position 79: ordinal not in range(256)
+
+
+Traceback (most recent call last):
+  File "main.py", line 141, in <module>
+    pd[21],))
+  File "/usr/lib/python3/dist-packages/MySQLdb/cursors.py", line 234, in execute
+    args = tuple(map(db.literal, args))
+  File "/usr/lib/python3/dist-packages/MySQLdb/connections.py", line 316, in literal
+    s = self.escape(o, self.encoders)
+  File "/usr/lib/python3/dist-packages/MySQLdb/connections.py", line 226, in unicode_literal
+    return db.string_literal(str(u).encode(unicode_literal.charset))
+UnicodeEncodeError: 'latin-1' codec can't encode character '\u2019' in position 198: ordinal not in range(256)
+
+
+Traceback (most recent call last):
+  File "main.py", line 141, in <module>
+    pd[21],))
+  File "/usr/lib/python3/dist-packages/MySQLdb/cursors.py", line 234, in execute
+    args = tuple(map(db.literal, args))
+  File "/usr/lib/python3/dist-packages/MySQLdb/connections.py", line 316, in literal
+    s = self.escape(o, self.encoders)
+  File "/usr/lib/python3/dist-packages/MySQLdb/connections.py", line 226, in unicode_literal
+    return db.string_literal(str(u).encode(unicode_literal.charset))
+UnicodeEncodeError: 'latin-1' codec can't encode character '\u201d' in position 79: ordinal not in range(256)
+
+
+Traceback (most recent call last):
+  File "main.py", line 141, in <module>
+    pd[21],))
+  File "/usr/lib/python3/dist-packages/MySQLdb/cursors.py", line 234, in execute
+    args = tuple(map(db.literal, args))
+  File "/usr/lib/python3/dist-packages/MySQLdb/connections.py", line 316, in literal
+    s = self.escape(o, self.encoders)
+  File "/usr/lib/python3/dist-packages/MySQLdb/connections.py", line 226, in unicode_literal
+    return db.string_literal(str(u).encode(unicode_literal.charset))
+UnicodeEncodeError: 'latin-1' codec can't encode character '\u2019' in position 198: ordinal not in range(256)
+
+
+Traceback (most recent call last):
+  File "main.py", line 141, in <module>
+    pd[21],))
+  File "/usr/lib/python3/dist-packages/MySQLdb/cursors.py", line 234, in execute
+    args = tuple(map(db.literal, args))
+  File "/usr/lib/python3/dist-packages/MySQLdb/connections.py", line 316, in literal
+    s = self.escape(o, self.encoders)
+  File "/usr/lib/python3/dist-packages/MySQLdb/connections.py", line 226, in unicode_literal
+    return db.string_literal(str(u).encode(unicode_literal.charset))
+UnicodeEncodeError: 'latin-1' codec can't encode character '\u201d' in position 79: ordinal not in range(256)
+
+
