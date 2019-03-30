@@ -1,0 +1,48 @@
+Traceback (most recent call last):
+  File "main.py", line 119, in <module>
+    thread.get("tim")#target_name
+TypeError: retrieve_and_store_image() missing 1 required positional argument: 'target_name'
+
+
+Traceback (most recent call last):
+  File "main.py", line 120, in <module>
+    thread.get("tim")#target_name
+  File "main.py", line 56, in retrieve_and_store_image
+    file_width, file_height, thumb_width, thumb_height)
+TypeError: returnFileJSON() missing 1 required positional argument: 'hash'
+
+
+Traceback (most recent call last):
+  File "main.py", line 120, in <module>
+    thread.get("tim")#target_name
+  File "main.py", line 56, in retrieve_and_store_image
+    file_width, file_height, thumb_width, thumb_height)
+  File "main.py", line 81, in returnFileJSON
+    "thumb_path":\"""" + userconf.thumb_storage_location + str(target_name) + file_ext + """\"}]"""
+TypeError: must be str, not NoneType
+
+
+Traceback (most recent call last):
+  File "main.py", line 145, in <module>
+    pd[21],))
+  File "/usr/lib/python3/dist-packages/MySQLdb/cursors.py", line 234, in execute
+    args = tuple(map(db.literal, args))
+  File "/usr/lib/python3/dist-packages/MySQLdb/connections.py", line 316, in literal
+    s = self.escape(o, self.encoders)
+  File "/usr/lib/python3/dist-packages/MySQLdb/connections.py", line 226, in unicode_literal
+    return db.string_literal(str(u).encode(unicode_literal.charset))
+UnicodeEncodeError: 'latin-1' codec can't encode character '\u2019' in position 198: ordinal not in range(256)
+
+
+Traceback (most recent call last):
+  File "main.py", line 145, in <module>
+    pd[21],))
+  File "/usr/lib/python3/dist-packages/MySQLdb/cursors.py", line 234, in execute
+    args = tuple(map(db.literal, args))
+  File "/usr/lib/python3/dist-packages/MySQLdb/connections.py", line 316, in literal
+    s = self.escape(o, self.encoders)
+  File "/usr/lib/python3/dist-packages/MySQLdb/connections.py", line 226, in unicode_literal
+    return db.string_literal(str(u).encode(unicode_literal.charset))
+UnicodeEncodeError: 'latin-1' codec can't encode character '\u2019' in position 198: ordinal not in range(256)
+
+
