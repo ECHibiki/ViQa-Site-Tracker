@@ -21,6 +21,14 @@ database = '""" + userconf.database + """'
 user = '""" + userconf.user + """'
 password = '""" + userconf.password + """'
 last_check = """ + str(int(time.time())) + """
+
+file_storage_location = '""" +  userconf.file_storage_location + """'
+thumb_storage_location = '""" +  userconf.thumb_storage_location +"""'
+file_storage_location_absolute = '""" + userconf.file_storage_location_absolute + """'
+thumb_storage_location_absolute = '""" + userconf.thumb_storage_location_absolute + """'
+
+rebuild_bot_location = '""" +userconf.rebuild_bot_location +"""'
+scraper_location = '""" +userconf.scraper_location + """'
 """)
         py_config.close()
 
@@ -81,11 +89,11 @@ def returnFileJSON(type, file_name, file_ext, file_size, target_name,
 
 try:
     db = MySQLdb.connect(host="localhost",user=userconf.user, passwd=userconf.password,
-                            db=userconf.database)
+                            db=userconf.database, charset='utf8')
     db_obj = db.cursor()
 
     sitestring = ",".join(userconf.sites)
-    site_data_arr = (os.popen("sudo python3 ../Multipurpose-Regex-Webscraper/py-cmd/regexscraper.py -u \"" + sitestring + "\" -r \(.*\) --raw"))
+    site_data_arr = (os.popen('sudo python3 ' + userconf.scraper_location + " -u \"" + sitestring + "\" -r \(.*\) --raw"))
     for site_no, site_data in enumerate(site_data_arr):
         site_json = (json.loads(site_data))
         for thread_container in reversed(site_json):
@@ -151,7 +159,5 @@ except Exception as err:
         log.write(str(traceback.format_exc()) + "\n\n")
         log.close
 
-
-
-#write_py()
+write_py()
 db.close()
