@@ -8,6 +8,15 @@ import traceback
 
 global_sha1_hash_value = "3e37f124251bdd8f8fdd93cf0824817a"; #empty string hash
 
+def safe_retrive_from_URL(file_ext, target_site, target_name):
+    thumb_file_ext = file_ext
+    fname, headers = urllib.request.urlretrieve(target_site + "thumb/" + str(target_name) + thumb_file_ext,
+        userconf.thumb_storage_location_absolute + str(target_name) + thumb_file_ext)
+    if headers.find("text/html") != -1:
+        raise ValueError("Not Media")
+    print(headers)
+    return thumb_file_ext
+
 def global_sha1_from_bin():
     pass
 
@@ -77,17 +86,15 @@ def retrieve_and_store_image(file_name, file_ext, file_size,
                 file_width, file_height, thumb_width, thumb_height)
         else:
             try:
-                thumb_file_ext = file_ext
-                urllib.request.urlretrieve(target_site + "thumb/" + str(target_name) + thumb_file_ext,
-                    userconf.thumb_storage_location_absolute + str(target_name) + thumb_file_ext)
+                thumb_file_ext = safe_retrive_from_URL(file_ext, target_site, target_name)
             except:
                 try:
-                    thumb_file_ext = ".png"
-                    urllib.request.urlretrieve(target_site + "thumb/" + str(target_name) + thumb_file_ext,
-                        userconf.thumb_storage_location_absolute + str(target_name) + thumb_file_ext)
+                    thumb_file_ext = safe_retrive_from_URL(".png", target_site, target_name)
                 except:
-                    urllib.request.urlretrieve(target_site + "thumb/" + str(target_name) + ".jpg",
-                        userconf.thumb_storage_location_absolute + str(target_name) + ".jpg")
+                    try:
+                        thumb_file_ext = = safe_retrive_from_URL(".jpg", target_site, target_name)
+                    except:
+                        thumb_file_ext = = safe_retrive_from_URL(".jpeg", target_site, target_name)
             full_file_ext = file_ext
             urllib.request.urlretrieve(target_site + "src/" + str(target_name) + full_file_ext,
                 userconf.file_storage_location_absolute + str(target_name) + full_file_ext)
