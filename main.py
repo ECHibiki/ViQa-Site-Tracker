@@ -92,9 +92,9 @@ def retrieve_and_store_image(file_name, file_ext, file_size,
                     thumb_file_ext = safe_retrive_from_URL(".png", target_site, target_name)
                 except:
                     try:
-                        thumb_file_ext = = safe_retrive_from_URL(".jpg", target_site, target_name)
+                        thumb_file_ext = safe_retrive_from_URL(".jpg", target_site, target_name)
                     except:
-                        thumb_file_ext = = safe_retrive_from_URL(".jpeg", target_site, target_name)
+                        thumb_file_ext = safe_retrive_from_URL(".jpeg", target_site, target_name)
             full_file_ext = file_ext
             urllib.request.urlretrieve(target_site + "src/" + str(target_name) + full_file_ext,
                 userconf.file_storage_location_absolute + str(target_name) + full_file_ext)
