@@ -57,6 +57,24 @@ def retrieve_and_store_image(file_name, file_ext, file_size,
                 userconf.file_storage_location_absolute + str(target_name) + full_file_ext)
             file_json = returnFileJSON("video", file_name, thumb_file_ext, full_file_ext, file_size, target_name,
                 file_width, file_height, thumb_width, thumb_height)
+        elif file_ext == ".flac" or file_ext == ".mp3":
+            try:
+                thumb_file_ext = file_ext
+                urllib.request.urlretrieve(target_site + "thumb/" + str(target_name) + thumb_file_ext,
+                    userconf.thumb_storage_location_absolute + str(target_name) + thumb_file_ext)
+            except:
+                try:
+                    thumb_file_ext = ".png"
+                    urllib.request.urlretrieve(target_site + "thumb/" + str(target_name) + thumb_file_ext,
+                        userconf.thumb_storage_location_absolute + str(target_name) + thumb_file_ext)
+                except:
+                    urllib.request.urlretrieve(target_site + "thumb/" + str(target_name) + ".jpg",
+                        userconf.thumb_storage_location_absolute + str(target_name) + ".jpg")
+            full_file_ext = file_ext
+            urllib.request.urlretrieve(target_site + "src/" + str(target_name) + full_file_ext,
+                userconf.file_storage_location_absolute + str(target_name) + full_file_ext)
+            file_json = returnFileJSON("audio", file_name, thumb_file_ext, full_file_ext, file_size, target_name,
+                file_width, file_height, thumb_width, thumb_height)
         else:
             try:
                 thumb_file_ext = file_ext
@@ -73,12 +91,12 @@ def retrieve_and_store_image(file_name, file_ext, file_size,
             full_file_ext = file_ext
             urllib.request.urlretrieve(target_site + "src/" + str(target_name) + full_file_ext,
                 userconf.file_storage_location_absolute + str(target_name) + full_file_ext)
-            file_json = returnFileJSON("image", file_name, thumb_file_ext, full_file_ext, target_name,
+            file_json = returnFileJSON("image", file_name, thumb_file_ext, full_file_ext, file_size, target_name,
                 file_width, file_height, thumb_width, thumb_height)
         return file_json
 
 def returnFileJSON(type, file_name, thumb_file_ext, full_file_ext, file_size, target_name,
-    file_width, file_height, thumb_width, thumb_height):
+                file_width, file_height, thumb_width, thumb_height):
     global global_sha1_hash_value
     return """[{
         "name":\"""" +  file_name +"""\",
