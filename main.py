@@ -38,6 +38,7 @@ def sanitize_post_data(post_data):
         post_data = post_data.replace("&hellip;","...")
         #post_data = post_data.replace(";","&#59;")
         post_data = post_data.replace("'","&#39;")
+        post_data = post_data.replace("'","&#39;")
 
     return post_data
 
@@ -48,43 +49,56 @@ def retrieve_and_store_image(file_name, file_ext, file_size,
     else:
         print(target_site + "src/" + str(target_name) + file_ext)
         if file_ext == ".webm" or file_ext == ".mp4":
-            urllib.request.urlretrieve(target_site + "thumb/" + str(target_name) + ".jpg",
-                userconf.thumb_storage_location_absolute + str(target_name) + ".jpg")
-            urllib.request.urlretrieve(target_site + "src/" + str(target_name) + file_ext,
-                userconf.file_storage_location_absolute + str(target_name) + file_ext)
-            file_json = returnFileJSON("video", file_name, file_ext, file_size, target_name,
+            thumb_file_ext = ".jpg"
+            full_file_ext = file_ext
+            urllib.request.urlretrieve(target_site + "thumb/" + str(target_name) + thumb_file_ext,
+                userconf.thumb_storage_location_absolute + str(target_name) + thumb_file_ext)
+            urllib.request.urlretrieve(target_site + "src/" + str(target_name) + full_file_ext,
+                userconf.file_storage_location_absolute + str(target_name) + full_file_ext)
+            file_json = returnFileJSON("video", file_name, thumb_file_ext, full_file_ext, file_size, target_name,
                 file_width, file_height, thumb_width, thumb_height)
         else:
-            urllib.request.urlretrieve(target_site + "thumb/" + str(target_name) + file_ext,
-                userconf.thumb_storage_location_absolute + str(target_name) + file_ext)
-            urllib.request.urlretrieve(target_site + "src/" + str(target_name) + file_ext,
-                userconf.file_storage_location_absolute + str(target_name) + file_ext)
-            file_json = returnFileJSON("image", file_name, file_ext, file_size, target_name,
+            try:
+                thumb_file_ext = file_ext
+                urllib.request.urlretrieve(target_site + "thumb/" + str(target_name) + thumb_file_ext,
+                    userconf.thumb_storage_location_absolute + str(target_name) + thumb_file_ext)
+            except:
+                try:
+                    thumb_file_ext = ".png"
+                    urllib.request.urlretrieve(target_site + "thumb/" + str(target_name) + thumb_file_ext,
+                        userconf.thumb_storage_location_absolute + str(target_name) + thumb_file_ext)
+                except:
+                    urllib.request.urlretrieve(target_site + "thumb/" + str(target_name) + ".jpg",
+                        userconf.thumb_storage_location_absolute + str(target_name) + ".jpg")
+            full_file_ext = file_ext
+            urllib.request.urlretrieve(target_site + "src/" + str(target_name) + full_file_ext,
+                userconf.file_storage_location_absolute + str(target_name) + full_file_ext)
+            file_json = returnFileJSON("image", file_name, thumb_file_ext, full_file_ext, target_name,
                 file_width, file_height, thumb_width, thumb_height)
         return file_json
 
-def returnFileJSON(type, file_name, file_ext, file_size, target_name,
+def returnFileJSON(type, file_name, thumb_file_ext, full_file_ext, file_size, target_name,
     file_width, file_height, thumb_width, thumb_height):
     global global_sha1_hash_value
     return """[{
         "name":\"""" +  file_name +"""\",
-        "type":\"""" + type + "\/" + file_ext[1:] +"""\",
+        "type":\"""" + type + "\/" + full_file_ext[1:] +"""\",
         "tmp_name":"None",
         "error":0,
         "size":""" + str(file_size) + """,
-        "filename":\"""" + file_name + file_ext + """\",
-        "extension":\"""" + file_ext[1:] + """\",
+        "filename":\"""" + file_name + full_file_ext + """\",
+        "extension":\"""" + full_file_ext[1:] + """\",
         "file_id":\"""" + str(target_name) +"""\",
-        "file":\"""" + str(target_name) + file_ext +"""\",
-        "thumb":\"""" + str(target_name) + file_ext +"""\",
+        "file":\"""" + str(target_name) + full_file_ext +"""\",
+        "thumb":\"""" + str(target_name) + thumb_file_ext +"""\",
         "is_an_image":true,
         "hash": \"""" + global_sha1_hash_value + """\",
         "width": """ + str(file_width) + """,
         "height":""" + str(file_height) + """,
         "thumbwidth":""" + str(thumb_width) + """,
         "thumbheight":""" + str(thumb_height) + """,
-        "file_path":\"""" + userconf.file_storage_location + str(target_name) + file_ext + """\",
-        "thumb_path":\"""" + userconf.thumb_storage_location + str(target_name) + file_ext + """\"}]"""
+        "file_path":\"""" + userconf.file_storage_location + str(target_name) + full_file_ext + """\",
+        "thumb_path":\"""" + userconf.thumb_storage_location + str(target_name) + thumb_file_ext + """\"}]"""
 
 
 try:
@@ -100,7 +114,7 @@ try:
             for thread in reversed(thread_container["threads"]):
                 if(int(thread["time"]) > userconf.last_check):
                     try:
-                        thread_url = userconf.sites[site_no][0:-12] + "res/" + str(thread.get("no"))
+                        thread_url = userconf.sites[site_no][0:-12] + "res/" + str(thread.get("no")) + ".html"
                         pd = [
                             "0", #ud
                             None, #thread
@@ -131,7 +145,7 @@ try:
                             "cantdeletethis", #password
                             "127.0.0.1", #ip
                             "0", #sticky
-                            "0", #locked
+                            "1", #locked
                             "0", #cycle
                             "0", #sage
                             thread.get("embed"), #embed
