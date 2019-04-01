@@ -12,7 +12,7 @@ def safe_retrive_from_URL(file_ext, target_site, target_name):
     thumb_file_ext = file_ext
     fname, headers = urllib.request.urlretrieve(target_site + "thumb/" + str(target_name) + thumb_file_ext,
         userconf.thumb_storage_location_absolute + str(target_name) + thumb_file_ext)
-    if headers.find("text/html") != -1:
+    if str(headers).find("text/html") != -1:
         raise ValueError("Not Media")
     print(headers)
     return thumb_file_ext
