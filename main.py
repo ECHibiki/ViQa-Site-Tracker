@@ -134,63 +134,73 @@ try:
     sitestring = ",".join(userconf.sites)
     site_data_arr = (os.popen('sudo python3 ' + userconf.scraper_location + " -u \"" + sitestring + "\" -r \(.*\) --raw"))
     for site_no, site_data in enumerate(site_data_arr):
-        site_json = (json.loads(site_data))
-        for thread_container in reversed(site_json):
-            for thread in reversed(thread_container["threads"]):
-                if(int(thread["time"]) > userconf.last_check):
-                    try:
-                        thread_url = userconf.sites[site_no][0:-12] + "res/" + str(thread.get("no")) + ".html"
-                        pd = [
-                            "0", #ud
-                            None, #thread
-                            thread.get("sub"), #sub
-                            thread.get("email"), #email
-                            thread.get("name"), #name
-                            thread.get("trip"), #trip
-                            thread.get("capcode"), #capcode
-                            (thread.get("com") + "<br/><a href=" + thread_url + ">" + thread_url + "</a>"
-                                if thread.get("com") != None else "<a href=" + thread_url + ">" + thread_url + "</a>") , #body
-                            (thread.get("com") + "<br/><a href=" + thread_url + ">" + thread_url + "</a>"
-                                if thread.get("com") != None else "<a href=" + thread_url + ">" + thread_url + "</a>"), #body_nomarkup
-                            str(int(time.time())), #time
-                            str(int(time.time())), #bump
-                            retrieve_and_store_image(
-                                thread.get("filename"), #name
-                                thread.get("ext"), #ext
-                                thread.get("fsize"), #file_size
-                                thread.get("w"), #file_width
-                                thread.get("h"), #file_height
-                                thread.get("tn_w"), #thumb_width
-                                thread.get("tn_h"), #thumb_height
-                                userconf.sites[site_no][0:-12], #target site
-                                thread.get("tim")#target_name
-                            ), #image
-                            "1", #num_files
-                            global_sha1_hash_value, # filehash
-                            "cantdeletethis", #password
-                            "127.0.0.1", #ip
-                            "0", #sticky
-                            "1", #locked
-                            "0", #cycle
-                            "0", #sage
-                            thread.get("embed"), #embed
-                            thread.get("sub") #slug
-                            ]
-                        for index, data in enumerate(pd):
-                            pd[index] = sanitize_post_data(data)
-                        db_obj.execute("INSERT INTO posts_" + userconf.board + """(id,
-                        thread,subject,email,name,trip,capcode,body,body_nomarkup,time,
-                        bump,files,num_files,filehash,password,ip,sticky,locked,cycle,
-                        sage,embed,slug)
-                        VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s);""",
-                        (pd[0],pd[1],pd[2],pd[3],pd[4],pd[5],pd[6],pd[7],pd[8],pd[9],pd[10],
-                        pd[11],pd[12],pd[13],pd[14],pd[15],pd[16],pd[17],pd[18],pd[19],pd[20],
-                        pd[21],))
-                    except Exception as err:
-                        with open("err_log.txt", "a+") as log:
-                            print(str(traceback.format_exc()))
-                            log.write(str(traceback.format_exc()) + "\n\n")
-                            log.close
+        try:
+            site_data = site_data.strip()
+            if site_data == userconf.sites[site_no] + " " + "Not found":
+                print(userconf.sites[site_no] + " " + "404")
+                raise Exception(userconf.sites[site_no] + " " + "404")
+            site_json = (json.loads(site_data))
+            for thread_container in reversed(site_json):
+                for thread in reversed(thread_container["threads"]):
+                    if(int(thread["time"]) > userconf.last_check):
+                        try:
+                            thread_url = userconf.sites[site_no][0:-12] + "res/" + str(thread.get("no")) + ".html"
+                            pd = [
+                                "0", #ud
+                                None, #thread
+                                thread.get("sub"), #sub
+                                thread.get("email"), #email
+                                thread.get("name"), #name
+                                thread.get("trip"), #trip
+                                thread.get("capcode"), #capcode
+                                (thread.get("com") + "<br/><a href=" + thread_url + ">" + thread_url + "</a>"
+                                    if thread.get("com") != None else "<a href=" + thread_url + ">" + thread_url + "</a>") , #body
+                                (thread.get("com") + "<br/><a href=" + thread_url + ">" + thread_url + "</a>"
+                                    if thread.get("com") != None else "<a href=" + thread_url + ">" + thread_url + "</a>"), #body_nomarkup
+                                str(int(time.time())), #time
+                                str(int(time.time())), #bump
+                                retrieve_and_store_image(
+                                    thread.get("filename"), #name
+                                    thread.get("ext"), #ext
+                                    thread.get("fsize"), #file_size
+                                    thread.get("w"), #file_width
+                                    thread.get("h"), #file_height
+                                    thread.get("tn_w"), #thumb_width
+                                    thread.get("tn_h"), #thumb_height
+                                    userconf.sites[site_no][0:-12], #target site
+                                    thread.get("tim")#target_name
+                                ), #image
+                                "1", #num_files
+                                global_sha1_hash_value, # filehash
+                                "cantdeletethis", #password
+                                "127.0.0.1", #ip
+                                "0", #sticky
+                                "1", #locked
+                                "0", #cycle
+                                "0", #sage
+                                thread.get("embed"), #embed
+                                thread.get("sub") #slug
+                                ]
+                            for index, data in enumerate(pd):
+                                pd[index] = sanitize_post_data(data)
+                            db_obj.execute("INSERT INTO posts_" + userconf.board + """(id,
+                            thread,subject,email,name,trip,capcode,body,body_nomarkup,time,
+                            bump,files,num_files,filehash,password,ip,sticky,locked,cycle,
+                            sage,embed,slug)
+                            VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s);""",
+                            (pd[0],pd[1],pd[2],pd[3],pd[4],pd[5],pd[6],pd[7],pd[8],pd[9],pd[10],
+                            pd[11],pd[12],pd[13],pd[14],pd[15],pd[16],pd[17],pd[18],pd[19],pd[20],
+                            pd[21],))
+                        except Exception as err:
+                            with open("err_log.txt", "a+") as log:
+                                print(str(traceback.format_exc()))
+                                log.write(str(traceback.format_exc()) + "\n\n")
+                                log.close
+        except:
+            with open("err_log.txt", "a+") as log:
+                print(str(traceback.format_exc()))
+                log.write(str(traceback.format_exc()) + "\n\n")
+                log.close
     os.system("sudo python3 " + userconf.rebuild_bot_location);
 except Exception as err:
     with open("err_log.txt", "a+") as log:
